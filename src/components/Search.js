@@ -23,9 +23,17 @@ const Search = () => {
             // console.log(data.query.search);
             setResults(data.query.search);
         }; 
-        
-        if(term){
-            apiRequest();
+
+        // using setTimeout to delay api call after user keystroke
+        const timeoutId = setTimeout(() => {
+            if(term){
+                apiRequest();
+            };
+        }, 1000)
+
+        // using clearTimeout to cancel previous setTimeout after every subsequent user keystroke which re-envokes useEffect and thus setTimeout again
+        return ()=>{
+            clearTimeout(timeoutId);
         };
         
     }, [term]);
@@ -34,13 +42,13 @@ const Search = () => {
         return(
             <div key={result.pageid} className='item'>
                 <div className='right floated content'>
-                    <a className='ui button'>Go</a>
+                    <a className='ui button' href={`https://en.wikipedia.org?curid=${result.pageid}`} >Go</a>
                 </div>
                 <div className='content'>
                     <div className='header'>
                         {result.title}
                     </div>
-                    {result.snippet}
+                    <span dangerouslySetInnerHTML={{ __html: result.snippet}}></span>       {/* as the name suggessts, this is a dangerous attribute due to XSS attacks. ONLY USE WITH TRUSTED SITES. Used to render only the inner html of api data */}
                 </div>
             </div>
                 
