@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 
-const Dropdown = ({items, selected, onSelectedChange}) => {
+const Dropdown = ({options, selected, onSelectedChange}) => {
     const [open, setOpen] = useState(false);
     const ref = useRef();      // this hook allows you to return whatever dom element you attach it to 
 
@@ -9,6 +9,7 @@ const Dropdown = ({items, selected, onSelectedChange}) => {
             // event.target identifies which elemtent was clicked. 
             // this logic determines that if the element is a child of the ref element, 
             // we return early, avoiding passing a false bolean to setOpen, causing the dropdown to not work as expected
+            // for toggle dropdown code refer to lecture 186 
             if (ref.current.contains(event.target)) {   
                 return;
             }
@@ -16,18 +17,18 @@ const Dropdown = ({items, selected, onSelectedChange}) => {
         });
     }, []);
 
-    const renderedItems = items.map((attribute)=>{
+    const renderedOptions = options.map((language)=>{
 
-        if(attribute.title == selected.title){
+        if(language.label == selected.label){
             return null;
         }
 
         return(
             <div 
-              key={attribute.title} 
-              onClick={()=>onSelectedChange(attribute)}
+              key={language.label} 
+              onClick={()=>onSelectedChange(language)}
               className='item'>
-                {attribute.title}
+                {language.label}
             </div>
         )
     });
@@ -35,12 +36,12 @@ const Dropdown = ({items, selected, onSelectedChange}) => {
     return(
         <div ref={ref} className='ui form'>
             <div className='field'>
-                <label className='label'>Select A Title</label>
+                <label className='label'>Select A Language</label>
                 <div onClick={()=>setOpen(!open)} className={`ui selection dropdown ${open ? 'visible active' : ''}`}>
                     <i className='dropdown icon'></i>
-                    <div className='text'>{selected.title}</div>
+                    <div className='text'>{selected.label}</div>
                     <div className={`menu ${ open ? 'visible transition' : ''}`}>
-                        {renderedItems}
+                        {renderedOptions}
                     </div>
                 </div>
             </div>
