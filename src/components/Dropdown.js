@@ -19,7 +19,7 @@ const Dropdown = ({label, options, selected, onSelectedChange}) => {
 
     const renderedOptions = options.map((language)=>{
 
-        if(language.label == selected.label){
+        if(language.label === selected.label){
             return null;
         }
 
