@@ -3,6 +3,12 @@ import React from 'react';
 const Link = ({className, href, children}) => {
     const onClick = e => {
         e.preventDefault();
+        // changes url to path provided as 3rd argument without refreshing page and making additional requests
+        window.history.pushState({}, '', href);
+
+        // purpose of the following code is to help detect url change
+        const navEvent = new PopStateEvent('popstate');
+        window.dispatchEvent(navEvent);
     }
 
     return(
