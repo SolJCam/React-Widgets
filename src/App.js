@@ -4,6 +4,7 @@ import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
 import Route from './components/Route';
+import Header from './components/Header';
 
 const items = [
     { 
@@ -41,6 +42,7 @@ const App = () => {
 
     return (
         <div> 
+            <Header />
             <Route path='/'>
                 {/* Whenever a component is passed to another compoenent like below, 
                 it can be referenced in the parent component via the prop keyword children */}
