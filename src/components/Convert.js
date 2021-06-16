@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 
 const Convert = ({language, text}) => {
     const [translated, setTranslated] = useState('');
@@ -18,7 +18,7 @@ const Convert = ({language, text}) => {
     useEffect(()=>{
         // cannot directly use async await within useEffect; must wrap it in a helper function
         const doTranslation = async () => {
-            const {data} = await Axios.post('https://translation.googleapis.com/language/translate/v2',{},{
+            const {data} = await axios.post('https://translation.googleapis.com/language/translate/v2',{},{
                 params: {
                     q: debouncedText,
                     target: language.value,

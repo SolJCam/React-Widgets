@@ -17,18 +17,18 @@ const Dropdown = ({label, options, selected, onSelectedChange}) => {
         });
     }, []);
 
-    const renderedOptions = options.map((language)=>{
+    const renderedOptions = options.map((color)=>{
 
-        if(language.label === selected.label){
+        if(color.label === selected.label){
             return null;
         }
 
         return(
             <div 
-              key={language.label} 
-              onClick={()=>onSelectedChange(language)}
+              key={color.label} 
+              onClick={()=>onSelectedChange(color)}
               className='item'>
-                {language.label}
+                {color.label}
             </div>
         )
     });
