@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import Dropdown from './Dropdown.js'
 import Convert from './Convert.js'
 
-const googleTransApiKey = "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM"
-
 const options = [
     {
         label: 'Afrikaans',
