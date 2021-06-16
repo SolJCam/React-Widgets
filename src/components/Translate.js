@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import Dropdown from './Dropdown.js'
+import Convert from './Convert.js'
+
+const googleTransApiKey = "AIzaSyCHUCmpR7cT_yDFHC98CZJy2LTms-IwDlM"
 
 const options = [
     {
@@ -18,14 +21,25 @@ const options = [
 
 const Translate = () => {
     const [language, setLanguage] = useState(options[0]);
+    const [text, setText] = useState('');
 
     return(
         <div>
-            <Dropdown 
+            <div className='ui form'> 
+                <div className='field'>
+                    <label>Enter Text</label>
+                    <input text={text} onChange={(e)=>setText(e.target.value)} />
+                </div>
+            </div>
+            <Dropdown
+              label="Select A Language" 
               options={options}
               selected={language}
               onSelectedChange={setLanguage}
             />
+            <hr />
+            <h3 className='ui header'>Output</h3>
+            <Convert language={language} text={text} />
         </div>
     );
 };
